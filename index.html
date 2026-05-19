@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AGREIA
+
+</title>
+  <style>
+    :root {
+      --bg: #030619;
+      --surface: rgba(12, 20, 36, 0.96);
+      --primary: #00ffff;
+      --accent: #b366ff;
+      --text: #f0f8ff;
+      --muted: #a8c5e0;
+      --border: rgba(255, 255, 255, 0.1);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+      color: var(--text);
+      background: 
+        radial-gradient(circle at 5% 5%, rgba(0,255,255,0.25), transparent 15%),
+        radial-gradient(circle at 95% 10%, rgba(179,102,255,0.20), transparent 18%),
+        radial-gradient(circle at 50% 95%, rgba(0,255,255,0.12), transparent 22%),
+        linear-gradient(180deg, #080e26 0%, #020305 100%);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: linear-gradient(180deg, rgba(4,9,20,0.92), rgba(4,9,20,0.78));
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .container { width: min(1180px, 100%); margin: 0 auto; padding: 0 1.2rem; }
+
+    nav ul { display: flex; align-items: center; justify-content: space-between; list-style: none; margin: 0; padding: 0.9rem 0; gap: 1rem; }
+
+    nav a { color: var(--text); text-decoration: none; padding: 0.6rem 1rem; border-radius: 999px; transition: transform 160ms ease, background 220ms ease, box-shadow 220ms ease; }
+
+    nav a:hover, nav a:focus-visible {
+      background: linear-gradient(90deg, rgba(0,240,255,0.14), rgba(155,108,255,0.12));
+      box-shadow: 0 6px 18px rgba(107,95,255,0.08), 0 2px 6px rgba(0,240,255,0.06);
+      transform: translateY(-3px);
+      color: #fff;
+    }
+
+    .hero {
+      min-height: 60vh;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 4rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at 15% 25%, rgba(0,255,255,0.25), transparent 12%),
+                  radial-gradient(circle at 85% 75%, rgba(179,102,255,0.22), transparent 14%),
+                  linear-gradient(120deg, rgba(0,0,0,0.1), transparent 40%);
+      mix-blend-mode: screen;
+      pointer-events: none;
+      filter: blur(5px);
+    }
+
+    .hero-content { position: relative; max-width: 860px; z-index: 2; padding: 0 1rem; }
+
+    .hero h1 { margin: 0 0 1rem; font-size: clamp(2.2rem, 4vw, 3.6rem); letter-spacing: -0.02em; line-height: 1.03; background: linear-gradient(90deg, #00ffff, #b366ff, #00ffff); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 0 50px rgba(0,255,255,0.4); filter: saturate(1.3) brightness(1.15); }
+
+    .hero p { margin: 0; color: var(--muted); font-size: 1.05rem; line-height: 1.8; }
+
+    main { width: min(1080px, 100%); margin: 0 auto 3rem; padding: 0 1.2rem; margin-top: 1.5rem; }
+
+    .card { background: linear-gradient(180deg, rgba(8,18,40,0.75), rgba(6,12,25,0.65)); border: 1px solid rgba(0,255,255,0.08); border-radius: 18px; padding: 1.6rem; margin-bottom: 1.6rem; box-shadow: 0 0 30px rgba(0,255,255,0.08), 0 14px 40px rgba(3,6,12,0.5); }
+
+    .card h2 { margin-top: 0; color: #fff; }
+
+    .card p { margin: 0.6rem 0 0; color: var(--muted); line-height: 1.75; }
+
+    .img-wrap { display: flex; align-items: center; justify-content: center; padding: 0.75rem 0; }
+
+    .img-wrap img { display: block; max-width: 100%; width: 900px; max-height: 520px; object-fit: contain; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 15px 40px rgba(0,255,255,0.15), 0 0 30px rgba(179,102,255,0.08); }
+
+    .form-group { margin-bottom: 1.2rem; }
+
+    .form-group label { display: block; margin-bottom: 0.4rem; font-weight: 500; color: #fff; font-size: 0.95rem; }
+
+    .form-group input,
+    .form-group textarea { width: 100%; padding: 0.75rem 1rem; background: rgba(0,20,40,0.7); border: 1px solid rgba(0,255,255,0.12); border-radius: 8px; color: #f0f8ff; font-family: inherit; font-size: 1rem; transition: border-color 200ms ease, box-shadow 200ms ease; }
+
+    .form-group input:focus,
+    .form-group textarea:focus { outline: none; border-color: #00ffff; box-shadow: 0 0 12px rgba(0,255,255,0.2); }
+
+    .form-group textarea { resize: vertical; min-height: 120px; }
+
+    .form-btn { background: linear-gradient(90deg, #00ffff, #b366ff); border: none; padding: 0.8rem 2rem; border-radius: 8px; color: #030619; font-weight: 600; cursor: pointer; font-size: 1rem; transition: transform 200ms ease, box-shadow 200ms ease; }
+
+    .form-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,255,255,0.25); }
+
+    @media (max-width: 920px) { .img-wrap img { width: 100%; max-height: 400px; } }
+    @media (max-width: 720px) { nav ul { flex-wrap: wrap; justify-content: center; } .hero { padding: 3rem 0; } main { margin-top: 1rem; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container">
+      <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#servicios">Objetivos</a></li>
+        <li><a href="#acerca">Estructura organizativa</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container hero-content">
+      <h1>AGREIA
+
+ALIANZA GLOBAL</h1>
+      <p>AGREIA es una organización
+internacional creada para garantizar
+que la inteligencia artificial sea
+utilizada de manera ética, segura y
+responsable en todo el mundo.mostrar tu proyecto en el mundo digital.</p>
+    </div>
+  </header>
+
+  <main>
+    <section id="inicio" class="card">
+      <h2>  Quienes somos</h2>
+      <p>AGREIA es un organismo internacional
+independiente fundado para supervisar, regular y
+promover el uso responsable de la inteligencia
+artificial. Nuestra organización trabaja junto a
+gobiernos, científicos y empresas tecnológicas
+para proteger los derechos digitales de las
+personas y prevenir riesgos globales relacionados
+con la IA.</p>
+<br>
+<br>
+<br>
+   <h2>  Mision </h2>
+      <p>Garantizar que el desarrollo y uso
+de la inteligencia artificial sea
+transparente, ético, seguro y
+beneficioso para toda la
+humanidad.
+<br>
+<br>
+<br>
+
+</p>
+<h2>  Vision </h2>
+      <p>Convertirnos en la principal
+autoridad internacional encargada
+de regular y supervisar la
+inteligencia artificial a nivel
+mundial.
+
+</p>
+    </section>
+
+    <section id="servicios" class="card">
+      <h2>Objetivos</h2>
+      <p>En un mundo cada vez más interconectado y dependiente de la tecnología, es indispensable plantear acciones que garanticen un desarrollo digital justo, seguro y responsable. Esta presentación se centra en tres objetivos estratégicos:</p>
+      <br>
+        <ol>
+            <li><strong>Promover la ética y la responsabilidad en el desarrollo tecnológico:</strong> Fomentar prácticas de diseño y desarrollo que prioricen la privacidad, la seguridad y el bienestar de los usuarios.</li>
+            <br>
+            <li><strong>Fomentar la innovación tecnológica con impacto positivo:</strong> Apoyar proyectos que utilicen la tecnología para resolver problemas sociales, mejorar la calidad de vida y promover la sostenibilidad.</li>
+            <br>
+            <li><strong>Garantizar la seguridad digital y la protección de datos:</strong> Implementar medidas para proteger a los usuarios contra amenazas cibernéticas, garantizar la integridad de los datos y promover una cultura de seguridad digital.</li>
+    </section>
+
+    <section id="acerca" class="card">
+      <h2>Estructura organizativa</h2>
+      <div class="img-wrap">
+        <img src="assets/Captura de pantalla 2026-05-19 162621.png" alt="Estructura organizativa">
+      </div>
+    </section>
+
+    <section id="portafolio" class="card">
+      <h2>Regulaciones Internacionales</h2>
+       <ol>
+            <li><strong>Auditorías tecnológicas
+obligatorias.</strong> Asegurar transparencia y cumplimiento normativo en el uso de plataformas digitales.</li>
+            <br>
+            <li><strong>Supervisión de IA avanzada:</strong> Establecer controles éticos y técnicos sobre algoritmos de alto impacto.</li>
+            <br>
+            <li><strong>Protección global de datos:</strong> Garantizar que la información personal esté resguardada bajo estándares internacionales.</li>
+    </section>
+
+    <section id="contacto" class="card">
+      <h2>Contactanos</h2>
+      <p>Ponte en contacto con nosotros para más información sobre AGREIA y nuestras iniciativas de IA responsable.</p>
+      <form>
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="asunto">Asunto</label>
+          <input type="text" id="asunto" name="asunto" placeholder="¿En qué podemos ayudarte?" required>
+        </div>
+
+        <div class="form-group">
+          <label for="mensaje">Mensaje</label>
+          <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos tu consulta..." required></textarea>
+        </div>
+
+        <button type="submit" class="form-btn">Enviar mensaje</button>
+      </form>
+    </section>
+  </main>
+</body>
+</html>
